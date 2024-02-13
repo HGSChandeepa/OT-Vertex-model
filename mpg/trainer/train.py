@@ -30,7 +30,7 @@ dataset = pd.read_csv(dataset_path, names=column_names,
 dataset.tail()
 
 # TODO: replace `your-gcs-bucket` with the name of the Storage bucket you created earlier
-BUCKET = 'gs://your-gcs-bucket'
+BUCKET = 'gs://${one-tender}-bucket'
 
 """### Clean the data
 
