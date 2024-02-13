@@ -1,0 +1,35 @@
+// Create a directory named "mpg"
+mkdir mpg
+
+// Change the current working directory to "mpg"
+cd mpg
+
+// Create an empty file named "Dockerfile"
+touch Dockerfile
+
+// Set the value of the variable "PROJECT_ID" to 'your-cloud-project'
+PROJECT_ID='your-cloud-project'
+
+// Set the value of the variable "BUCKET_NAME" to "gs://your-cloud-project-bucket"
+BUCKET_NAME="gs://${PROJECT_ID}-bucket"
+
+// Create a Google Cloud Storage bucket with the specified location and name
+gsutil mb -l us-central1 $BUCKET_NAME
+
+// Create a directory named "trainer"
+mkdir trainer
+
+// Create an empty file named "train.py" inside the "trainer" directory
+touch trainer/train.py
+
+// Set the value of the variable "IMAGE_URI" to "gcr.io/your-cloud-project/mpg:v1"
+IMAGE_URI="gcr.io/$PROJECT_ID/mpg:v1"
+
+// Build a Docker image using the current directory as the build context and tag it with the specified image URI
+docker build ./ -t $IMAGE_URI
+
+// Run a Docker container using the specified image URI
+docker run $IMAGE_URI
+
+// Push the Docker image to a container registry
+docker push $IMAGE_URI
